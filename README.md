@@ -266,23 +266,35 @@ customDomains = each.value.domain == "" ? null : [
             }
           ] 
 ```
-### Terraform Befehle
+### Befehle
+Normalerweise würde man ein Serivce Principle zu authentifizierung nutzen jedoch ist dies im Students account nicht möglich daher musste die Azure CLI verwendet werden.
 ```shell
 az login
 ```
+Der Befehl ```init``` initialisiert ein Terraform-Verzeichnis und lädt die erforderlichen Provider-Plugins herunter. Es muss in einem Terraform-Verzeichnis ausgeführt werden, bevor andere Befehle wie ```terraform plan``` oder ```terraform apply``` ausgeführt werden können. Es erstellt auch die Datei ".terraform" im aktuellen Verzeichnis, die Informationen über die verwendeten Provider enthält.
+
 ```shell
 terraform init
 ```
+
+Der Befehl ```terraform plan``` erstellt einen Plan für die Erstellung oder Änderung der Ressourcen, die in einer Terraform-Konfigurationsdatei definiert sind. Es zeigt an, welche Änderungen an den Ressourcen vorgenommen werden, und gibt eine Vorschau auf die Auswirkungen dieser Änderungen. Der Befehl ```terraform plan``` muss nach dem ```terraform init``` Befehl ausgeführt werden, damit er Zugriff auf die Provider-Plugins hat und die aktuellen Zustände der Ressourcen abrufen kann. Mit dem Output des Befehls kann man die Änderungen überprüfen bevor man sie mit "terraform apply" umsetzt.
+
 ```shell
 terraform plan
 ```
+Der Befehl ```terraform apply``` führt den zuvor erstellten Terraform-Plan aus und erstellt oder ändert die Ressourcen, die in der Konfigurationsdatei definiert sind. Es werden die von ```terraform plan``` berechneten Schritte ausgeführt, um die gewünschten Ressourcen zu erstellen oder zu ändern.
+
+Der Befehl fordert eine Bestätigung des Benutzers an, bevor er fortfährt, und gibt eine Zusammenfassung der durchgeführten Änderungen aus.
+
 ```shell
 terraform apply
 ```
+
+Der Befehl ```terraform destroy``` zerstört die Ressourcen, die durch eine Terraform-Konfigurationsdatei verwaltet werden. Es analysiert die Konfigurationsdatei und identifiziert die Ressourcen, die erstellt wurden, und löscht diese Ressourcen von der Provider-API.
+
 ```shell
 terraform destroy
 ```
-
 
 ## Vergleich der Provisionierungsmöglichkeiten
 
