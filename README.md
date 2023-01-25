@@ -30,6 +30,8 @@ Dadurch das die Container Apps serverless sind und auf 0 skalieren können sind 
 ## Provisionierung in Azure
 
 ### Azure Portal
+![alt text](/images/az_portal.JPG)
+![alt text](/images/az_portal_2.JPG)
 ### Bicep
 ### Terraform
 
