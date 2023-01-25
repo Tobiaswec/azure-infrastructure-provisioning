@@ -39,11 +39,15 @@ Das manuelle Konfigurieren ist natürlich auch wesentlich fehleranfälliger als 
 Das Erstellen einer Azure Container App sieht im Azure Portal wie folgt aus:
 
 ![alt text](/images/az_portal.JPG)
-![alt text](/images/az_portal_2.JPG)
+![alt text](/images/az_portal_2.JPG) </br>
 Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Subpages wühlen um die Resourcegroup sowie die zwei Container Apps zu konfigurieren, vorrausgesetzt man hat dies zuvor schon einmal gemacht und die UI hat sich nicht verändert.
 
 ### Bicep
 ### Terraform
+Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschiedenen Cloud Platformen/Anbieter wie AWS, Microsoft Azure oder Google cloud zu provisionieren. Sie verwendet dabei eine eigene Sprache die HashiCorp Configuration Language(HCL). Dies ist von der Syntac sher ähnlich wie Json.
+
+Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur brechnet sich das Delta zum gewünschtem, im Terrformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnnung benötigt wird, muss auf dem lokalen System gespeichert sein und ebenfalls in die Versionsverwaltung integriert werden.
+
 
 ## Vergleich der Provisionierungsmöglichkeiten
 
