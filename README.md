@@ -267,8 +267,21 @@ customDomains = each.value.domain == "" ? null : [
           ] 
 ```
 ### Terraform Befehle
+```shell
 az login
-init
+```
+```shell
+terraform init
+```
+```shell
+terraform plan
+```
+```shell
+terraform apply
+```
+```shell
+terraform destroy
+```
 
 
 ## Vergleich der Provisionierungsmöglichkeiten
