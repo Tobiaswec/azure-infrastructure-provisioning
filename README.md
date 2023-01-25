@@ -228,7 +228,9 @@ resource "azapi_resource" "aca" {
 ```
 
 Um einen Output, wie Beispielsweise der Fully Quallified Domain Name, nach der Erstellung eines Cotainer nutzen zu können muss dieser bereits im Template definiert werden definiert werden. 
-```terraform response_export_values = ["properties.configuration.ingress.fqdn"]```
+```terraform 
+response_export_values = ["properties.configuration.ingress.fqdn"]
+```
 
 Anschließend kann man den Output wie folgt nutzen.
 ```terraform
@@ -239,6 +241,7 @@ output "container_app_urls" {
 }
 ```
 #### Custom Domains und Zertifikate
+Es wurde zusätzlich versucht Custom Domains für Services zu vergeben. Die Domain wird hier bei Cloudflare gehostet und dieser Dienst wird auch als Reverse Proxy benutzt. Die Custom Domains vergeben zu können muss man bei Cloudflare einen TXT Record mit der "ausid" also die Azure UserID hinterlegen sowie einen CNAME Record nach der Erstellung des Services hinzufügen (kann auch automatisiert werden mit Terraform). Auf der Azure muss ebenfalls ein Zertifikat von Cloudfare hinterlegt werden. 
 ```terraform
 resource "azapi_resource" "certificate" {
   type = "Microsoft.App/managedEnvironments/certificates@2022-03-01"
@@ -253,12 +256,13 @@ resource "azapi_resource" "certificate" {
 }
 ```
 
+Bei Azure Container Apps kann man anschließend den Custom Domain wie folgt setzen.
 ```terraform
 customDomains = each.value.domain == "" ? null : [
             {
               bindingType = "SniEnabled"
               certificateId = azapi_resource.certificate.id
-              name = each.value.domain
+              name = "example.com"
             }
           ] 
 ```
