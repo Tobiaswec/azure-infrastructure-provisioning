@@ -298,4 +298,10 @@ terraform destroy
 
 ## Vergleich der Provisionierungsmöglichkeiten
 
-## Abgrenzung zu Ansible
+
+## Theoretische Abgrenzung von Terraform zu Ansible
+
+Ansible verfolgt im Vergleich zu Terraform einen prozedualen Ansatz und keinen deklarativen. Das bedeutet, dass man nicht einfach den gewünschten Zustand beschreibt, sondern Schritt für Schritt in der richtigen Reihenfolgen definieren muss. Dabei geht jedoch der große Vorteil bei der Provision von Infrastruktur verloren. Der Prozeduale Ansatz eigent sich jedoch besser um beispielsweise Konfigurations- und Softare-Updates auf vielen Rechnern gleichzeitig durchzuführen. Daher bezeichnet man Ansible häufig als Konfigurations-Management-Tool. Häufig wird Terraform in Kombination mit Ansible eingesetzt um alle Infrastruktur-Phasen abzudecken.
+
+Bekannte Softwares dich sich ebenfalls in der selben Kategorie wie Ansible wieder finden sind Puppet und Chef. Diese sind jedoch bei weitem nicht so weit verbreitet wie Ansible. Der Grund dafür ist, dass Ansible im Vergleich zu der Konkurrenz „agentless“ funktioniert. Das bedeutet, dass auf den Rechnern, auf welche man zugreift, keinerlei Software für den Zugriff mit Ansible installiert werden muss. Die erlechtert, das initiale Setup und eventuelle Updates des Konfigurations-Management-Tools.
+
