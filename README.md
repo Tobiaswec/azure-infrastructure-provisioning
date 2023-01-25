@@ -94,6 +94,7 @@ resource "azurerm_log_analytics_workspace" "log" {
 }
 ```
 #### Erstellen von Container Apps
+Es wurde ein Variable erstellt die eine Liste an Container Apps Eigenschaften definiert die im späteren Verlauf zum Provisionieren benutzt wird.
 ```terraform
 variable "container_apps" {
   type = list(object({
