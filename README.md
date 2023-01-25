@@ -30,8 +30,18 @@ Dadurch das die Container Apps serverless sind und auf 0 skalieren können sind 
 ## Provisionierung in Azure
 
 ### Azure Portal
+Das erstmalige Provisionieren von Infrasturktur für kleine Architekturn ist unter Verwendung des Azure Portal relative einfach und schnell. Die interaktive Web-UI ermöglicht es auch Personen die nicht Entwickler sind oder Code schreiben können, Infrastruktur zu provisionieren.
+
+Jedoch hat die Verwendung des Azure Portals einige Nachteile im Vergleich zu den Infrastructure as Code ansätzen.
+Die Infrastruktur kann nicht versioniert werden und bei Änderungen muss wieder durch etliche Subpages des Protals durchgeklickt werden. Es können zwar ARM-Templates aus der erstellten Infrastruktur generiert werden, jedoch hatten wir beim importieren dieser einige Probleme.
+Das manuelle Konfigurieren ist natürlich auch wesentlich fehleranfälliger als durch die Beschreibung durch Code.
+
+Das Erstellen einer Azure Container App sieht im Azure Portal wie folgt aus:
+
 ![alt text](/images/az_portal.JPG)
 ![alt text](/images/az_portal_2.JPG)
+Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Subpages wühlen um die Resourcegroup sowie die zwei Container Apps zu konfigurieren, vorrausgesetzt man hat dies zuvor schon einmal gemacht und die UI hat sich nicht verändert.
+
 ### Bicep
 ### Terraform
 
