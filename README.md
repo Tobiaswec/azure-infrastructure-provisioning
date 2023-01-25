@@ -164,6 +164,8 @@ variable "container_apps" {
     ]
   }] 
 ```
+
+Um die Container Apps zu provisionieren wurde über die Liste iteriert und so konnte ein generische Funktion zum erstellen dieser implementiert werden. Da Terraform die Container Apps nicht nativ unterstützt musste hier die ```azapi_resource``` verwendet werden, welche direkt mit der Azure API kommuniziert. Ebenfalls wurde hier eine private Docker Registry verwendet, nutzt man die Azure Container Registry muss man keine Registry definieren. 
 ```terraform
 resource "azapi_resource" "aca" {
   for_each  = { for ca in var.container_apps: ca.name => ca}
@@ -224,8 +226,42 @@ resource "azapi_resource" "aca" {
   response_export_values = ["properties.configuration.ingress.fqdn"]
 }
 ```
-#### Custom Domains und Zertifikate
 
+Um einen Output, wie Beispielsweise der Fully Quallified Domain Name, nach der Erstellung eines Cotainer nutzen zu können muss dieser bereits im Template definiert werden definiert werden. 
+```terraform response_export_values = ["properties.configuration.ingress.fqdn"]```
+
+Anschließend kann man den Output wie folgt nutzen.
+```terraform
+output "container_app_urls" {
+  value = {
+    for app in azapi_resource.aca : app.name =>  jsondecode(azapi_resource.aca[app.name].output).properties.configuration.ingress.fqdn
+  }
+}
+```
+#### Custom Domains und Zertifikate
+```terraform
+resource "azapi_resource" "certificate" {
+  type = "Microsoft.App/managedEnvironments/certificates@2022-03-01"
+  name = "anyidea.ai"
+  location = var.location
+  parent_id = azapi_resource.aca_env.id
+  body = jsonencode({
+    properties = {
+      value = filebase64("origin.pem")
+    }
+  })
+}
+```
+
+```terraform
+customDomains = each.value.domain == "" ? null : [
+            {
+              bindingType = "SniEnabled"
+              certificateId = azapi_resource.certificate.id
+              name = each.value.domain
+            }
+          ] 
+```
 ### Terraform Befehle
 az login
 init
