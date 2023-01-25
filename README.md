@@ -48,6 +48,58 @@ Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschie
 
 Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur brechnet sich das Delta zum gewünschtem, im Terrformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnnung benötigt wird, muss auf dem lokalen System gespeichert sein und ebenfalls in die Versionsverwaltung integriert werden.
 
+#### Terraform Provider
+Terraform Provider sind Erweiterungen für Terraform, die es ermöglichen, Ressourcen in verschiedenen Technologie-Stack zu verwalten. Jeder Provider ist für eine bestimmte Technologie oder einen Dienst verantwortlich und stellt die entsprechenden Ressourcen und Aktionen bereit, die von Terraform verwendet werden können. In diesem Fall wurde der Azure Ressource Manager zum provisionieren der Ressourcegroup sowie der Log Analytics verwendet. Zusätzlich musste die Azure API eingebunden werden da Terraform die Container Apps noch nicht native unterstützt.
+
+```terraform
+terraform {
+  required_version = "1.3.6"
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>3.17.0"
+    }
+    azapi = {
+      source = "Azure/azapi"
+      version = "~>0.4.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+provider "azapi" { }
+```
+#### Erstellen einer Resource Group
+Eine Resource Group in Azure ist eine logische Gruppe von Azure-Ressourcen, die gemeinsam verwaltet werden. In diesem Beispiel werden die Container Enviroment, die Log Analytics sowie die Container Apps in der "clcProjectTerraform" verwaltet.
+```
+resource "azurerm_resource_group" "rg" {
+  name      = "clcProjectTerraform"
+  location  = var.location
+  tags      = local.tags
+}
+```
+#### Erstellen von Log Analytics
+Azure Log Analytics ist ein Dienst in Azure, mit dem Sie system- und anwendungsbezogene Logs und Metriken sammeln, analysieren und visualisieren können. Es bietet eine einheitliche Plattform für die Überwachung von Azure-Ressourcen, wie beispielsweise die Contaienr Apps.
+```
+resource "azurerm_log_analytics_workspace" "log" {
+  name                = "log-aca-terraform"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+  tags                = local.tags
+}
+```
+#### Erstellen von Container Apps
+#### Custom Domains und Zertifikate
+
+### Terraform Befehle
+az login
+init
+
 
 ## Vergleich der Provisionierungsmöglichkeiten
 
