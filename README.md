@@ -9,6 +9,15 @@ Wir versuchen mit der für uns neue Technologie Terraform, Infrastruktur auf Mic
 Die zu provisionierende Architektur besteht aus einem Angular Frontend und einem Python/Flask Backend-Service. Als Datenbank wir ein MongoDB Cluster verwendet die über MongoDB Atlas auf AWS betrieben wird. Die Service ML-Frontend und ML-Backend werden in Azure als Container Apps betrieben.
 
 ### MongoDB Atlas
+![alt text](/images/mongodb.jpg)
+Die MongoDb wir als Cluster mit drei Shareds auf AWS betrieben. Dieses Cluster wird Shared betrieben, also RAM und CPU wird sich mit anderen Benutzer geteilt. Da wir auch unter 512MB Speicher benutzen sind wir hier noch im free Tier, es gibt jedoch folgenden kostenpflichtige Optionen:
+
+<ul>
+  <li>Dedicated</li>
+  <li>Serverless</li>
+</ul>  
+
+Weitere Informationen: https://www.mongodb.com/pricing
 
 ### Anwendungsfall
 ![alt text](/images/ml_frontend.jpg)
