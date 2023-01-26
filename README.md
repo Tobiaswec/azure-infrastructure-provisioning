@@ -335,10 +335,10 @@ Automated Infrastructue Provisioning/(Infrastructure-as-Code). Wie wurde im vorl
 Es wurde ein Vergleich von Provisionierungsmöglichkeiten in Azure ausgearbeitet.</br>
 
 Skalierbarkeit. Wie wurde im vorliegenden Projekt Skalierbarkeit berücksichtigt?</br>
-Azure Container Apps sind hoch skalierbar. In diesem Projekt wurder der Autoscale von Azure verwendet, man kann die Anzahl der Instanzen dabei in den jeweiligen Templates mit "minReplicas" und "maxReplicas" definieren. Die Mindestanzahl sollte dabei auf 0 gesetzt werden damit die Container auf 0 herunterskalieren wenn diese nicht verwendet werden, dies spart Kosten. Die Maximale Anzahl kann nach belieben adaptiert werden.</br
+Azure Container Apps sind hoch skalierbar. In diesem Projekt wurden der Autoscale von Azure verwendet, man kann die Anzahl der Instanzen dabei in den jeweiligen Templates mit "minReplicas" und "maxReplicas" definieren. Die Mindestanzahl sollte dabei auf 0 gesetzt werden damit die Container auf 0 herunterskalieren, wenn diese nicht verwendet werden, dies spart Kosten. Die Maximale Anzahl kann nach Belieben adaptiert werden.</br
 
 Ausfallssicherheit.  Wie wurde im vorliegenden Projekt Ausfallssicherheit berücksichtigt?</br>
-Die verwendete MongoDB wird als Cluster mit 3 Replicas betrieben, dies sollte eine gute Basis für die Ausfallsicherheit eine Datenbank bilden. In einem reelen Betrieb müssten natürliche Backups gemacht werden um diese im Worst Case wiederherrstellen zu können, jedoch wurde in diesem Studienprojekt auf Grund der Kosten darauf verzichtet.</br>
+Die verwendete MongoDB wird als Cluster mit 3 Replicas betrieben, dies sollte eine gute Basis für die Ausfallsicherheit eine Datenbank bilden. In einem reellen Betrieb müssten natürliche Backups gemacht werden um diese im Worst Case wiederherstellen zu können, jedoch wurde in diesem Studienprojekt auf Grund der Kosten darauf verzichtet.</br>
 
 Für die Azure Container Apps ist in den SLAs eine Ausfallsicherheit von 99.95% definiert. Für Projekte wie dieses, dass keine kritischen Daten verarbeitet und bei dem eine kurze Downtime keine tragischen Verluste zu verbuchen hätte ist es vollkommen ausreichend.</br>
 Weitere Informationen: https://azure.microsoft.com/en-us/support/legal/sla/container-apps/v1_0/ </br>
@@ -350,4 +350,8 @@ Replikation. Wo nutzen Sie im gegenständlichen Projekt Daten-Replikation?</br>
 
 
 Kosten. Welche Kosten verursacht Ihre Lösung? Welchen monetären Vorteil hat diese Lösung gegenüber einer Nicht-Cloud-Lösung?</br>
-Die Azure Container Apps sind bis zu einer Anzahl von 2 Mio Request im Monat kostenlos. Diese Anzahl überschreiten wir in diesem Projekt nicht, daher gibt es auch keine Kosten zu verbuchen. Das MongoDB Cluster fällt bei der derzeitigen Verwendung ebenfalls noch in den free Tier.
+Die Azure Container Apps sind bis zu einer Anzahl von 2 Mio. Request im Monat kostenlos. Diese Anzahl überschreiten wir in diesem Projekt nicht, daher gibt es auch keine Kosten zu verbuchen. </br>
+https://azure.microsoft.com/en-us/pricing/details/container-apps/ </br>
+
+ </br>
+https://www.mongodb.com/pricing
