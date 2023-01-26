@@ -301,7 +301,7 @@ Der Befehl ```init``` initialisiert ein Terraform-Verzeichnis und lädt die erfo
 terraform init
 ```
 
-Der Befehl ```terraform plan``` erstellt einen Plan für die Erstellung oder Änderung der Ressourcen, die in einer Terraform-Konfigurationsdatei definiert sind. Es zeigt an, welche Änderungen an den Ressourcen vorgenommen werden, und gibt eine Vorschau auf die Auswirkungen dieser Änderungen. Der Befehl ```terraform plan``` muss nach dem ```terraform init``` Befehl ausgeführt werden, damit er Zugriff auf die Provider-Plugins hat und die aktuellen Zustände der Ressourcen abrufen kann. Mit dem Output des Befehls kann man die Änderungen überprüfen bevor man sie mit "terraform apply" umsetzt.
+Der Befehl ```terraform plan``` erstellt einen Plan für die Erstellung oder Änderung der Ressourcen, die in einer Terraform-Konfigurationsdatei definiert sind. Es zeigt an, welche Änderungen an den Ressourcen vorgenommen werden, und gibt eine Vorschau auf die Auswirkungen dieser Änderungen. Der Befehl ```terraform plan``` muss nach dem ```terraform init``` Befehl ausgeführt werden, damit er Zugriff auf die Provider-Plugins hat und die aktuellen Zustände der Ressourcen abrufen kann. Mit dem Output des Befehls kann man die Änderungen überprüfen bevor man sie mit ```terraform apply``` umsetzt.
 
 ```shell
 terraform plan
