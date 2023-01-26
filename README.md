@@ -70,10 +70,10 @@ Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Sub Pag
 ### Terraform
 Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschiedenen Cloud Plattformen/Anbieter wie AWS, Microsoft Azure oder Google Cloud zu provisionieren. Sie verwendet dabei eine eigene Sprache die HashiCorp Configuration Language(HCL). Dies ist von der Syntax sehr ähnlich wie JSON.
 
-<img src="/images/terraform.jpg" alt="drawing" width="500"/>
 Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur berechnet sich das Delta zum gewünschtem, im Terraformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API, um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnung benötigt wird, ist auf dem lokalen System gespeichert und muss ebenfalls in die Versionsverwaltung integriert werden. Dieser Iststand der provisionierten Infrastruktur könnte auch über das ```terraform_remote_state``` feature auf Amazon S3, Azure Blob Storage, Google Cloud Storage, Alibaba Cloud OSS gespeichert werden.
 
 #### Terraform Provider
+<img src="/images/terraform.jpg" alt="drawing" width="500"/>
 Terraform Provider sind Erweiterungen für Terraform, die es ermöglichen, Ressourcen in verschiedenen Technologie-Stack zu verwalten. Jeder Provider ist für eine bestimmte Technologie oder einen Dienst verantwortlich und stellt die entsprechenden Ressourcen und Aktionen bereit, die von Terraform verwendet werden können. In diesem Fall wurde der Azure Ressource Manager zum provisionieren der Ressourcegroup sowie der Log Analytics verwendet. Zusätzlich musste die Azure API eingebunden werden da Terraform die Container Apps noch nicht native unterstützt.
 
 ```terraform
