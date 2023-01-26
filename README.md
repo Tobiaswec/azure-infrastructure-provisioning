@@ -1,6 +1,7 @@
 # Bereitstellung von Cloud-Infrastruktur in Azure
 
 ## Aufgabenstellung
+Wir versuchen mit der für uns neue Technologie Terraform, Infrastruktur auf Microsoft Azure zu provisionieren und diese ebenfalls zu deployen. Es werden dabei 2 Microservices auf verschiedenen Containern deployed, die miteinander kommunizieren. Zusätzlich sollen die Microservices auf eine Datenbank zugreifen, die über MongoDB Atlas auf Amazon Web Services gehostet wird. Für die Microservices wird verglichen, wie sich die Provisionierung mit Terraform zu der von Bicep bzw. der über das Azure-Portal-UI unterscheidet, dabei sollen die jeweiligen Vor- und Nachteile hervorgehoben werden. Mit Terraform kann man zwar auch deployen, aber die eigentliche Stärke liegt im Provisionieren der Infrastruktur. Wir untersuchen zusätzlich, wie sich das Deployen mit Terraform im theoretischen Vergleich zu anderen gängigen Deployment-Technologien wie Ansible oder Jenkins schlägt.
 
 ## Architektur
 ![alt text](/images/architecture.jpg)
