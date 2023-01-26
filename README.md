@@ -328,3 +328,11 @@ Ansible verfolgt im Vergleich zu Terraform einen prozedualen Ansatz und keinen d
 
 Bekannte Softwares dich sich ebenfalls in der selben Kategorie wie Ansible wieder finden sind Puppet und Chef. Diese sind jedoch bei weitem nicht so weit verbreitet wie Ansible. Der Grund dafür ist, dass Ansible im Vergleich zu der Konkurrenz „agentless“ funktioniert. Das bedeutet, dass auf den Rechnern, auf welche man zugreift, keinerlei Software für den Zugriff mit Ansible installiert werden muss. Die erlechtert, das initiale Setup und eventuelle Updates des Konfigurations-Management-Tools.
 
+
+## Fragestellungen der Abgabe:
+Automated Infrastructue Provisioning/(Infrastructure-as-Code). Wie wurde im vorliegenden Projekt Automated Infrastructure Provisioning berücksichtigt? </br>
+Skalierbarkeit. Wie wurde im vorliegenden Projekt Skalierbarkeit berücksichtigt?</br>
+Ausfallssicherheit.  Wie wurde im vorliegenden Projekt Ausfallssicherheit berücksichtigt?</br>
+NoSql. Welchen Beitrag leistet NoSql in der vorliegenden Problemstellung?</br>
+Replikation. Wo nutzen Sie im gegenständlichen Projekt Daten-Replikation?</br>
+Kosten. Welche Kosten verursacht Ihre Lösung? Welchen monetären Vorteil hat diese Lösung gegenüber einer Nicht-Cloud-Lösung?</br>
