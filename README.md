@@ -425,6 +425,25 @@ terraform destroy
 
 ## Vergleich der Provisionierungsmöglichkeiten
 
+### Easy to learn?
+Bicep und Terraform sind sich in der Syntax aufgrund der Tatsache, dass es sich bei beiden um deskriptive Sprachen handelt, viel ähnlicher als wir gedacht haben. Für uns waren beide Sprachen Neuland. Wir hatten aber dank zahlreichen Tutorials und guter Dokumentation einen schnelle Lernkurve und würden Biceps und Terraform als "easy to learn" einstufen.
+
+### Azure Support
+Besonders bei den Container Apps, welche es noch nicht lange gibt, hat sich gezeigt, dass diese viel besser in Biceps integriert sind als in Terraform. 
+
+### Muli-Platform-Support
+Da sich Bicep und Terraform so ähnlich sind in ihrer Syntax sehen wir den Vorteil, dass man Terraform für verschiedene Cloudanbieter verwenden kann nicht ganz so stark. Nur wenn Multi-Cloud exzessiv eingesetzt wird kann man die Infrastrukturbeschreibung einheitlich halten.
+
+### State
+Terraform speichert den State in eigenen Statefiles ab. Biceps direkt im Azure-Portal. Statefile müssen selber verwaltet werden in Cloud oder lokal.
+Bei Bicep werden Ressourcen nur über Namen erkannt. Daher kann eine einfache Unbenennung einer Ressource schnell zur Herausforderung werden und es kann nötig sein die ganze Infrastruktur neu zu deployn. Dieses Problem hatten wir bei Terraform nicht.
+
+### Pricing
+Bicep ist in Azure integriert und dadurch für Azure-User gratis. Terraform ist auch gratis zu verwenden jedoch gibt es gewisse Features betreffend Governance und Teamarbeit nur für einen Preis von ab 20$ pro User und Monat.
+
+### IDE Support
+Wir waren stark begeistert von den Extensions für VS-Code. Hier konnten Bicep und Terraform voll und ganz punkten.
+
 
 ## Theoretische Abgrenzung von Terraform zu Ansible
 
