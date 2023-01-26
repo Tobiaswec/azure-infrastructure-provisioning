@@ -6,10 +6,14 @@ Wir versuchen mit der für uns neue Technologie Terraform, Infrastruktur auf Mic
 ## Architektur
 ![alt text](/images/architecture.jpg)
 
-Die zu provisionierende Architektur besteht aus einem Angular Frontend und einem Python/Flask Backend-Service. Als Datenbank wir ein MongoDB Cluster verwendet die über MongoDB Atlas auf AWS betrieben wird. Der Usecase dieser Architektur sieht wie folgt aus:
-Der Priorizierungs service priotizert Daten wie wissenschaftliche Artikel und News, welche in der Mongodb abgelegt sind, anhand der Benutzereingaben (Keywords) im Frontend. Die Artikel welche die höchste Korrelation zu den Keywords besitzen werden dem Benutzer schlussendlich angezeigt. </br>
+Die zu provisionierende Architektur besteht aus einem Angular Frontend und einem Python/Flask Backend-Service. Als Datenbank wir ein MongoDB Cluster verwendet die über MongoDB Atlas auf AWS betrieben wird. Die Service ML-Frontend und ML-Backend werden in Azure als Container Apps betrieben.
 
-Das die Service ML-Frontend und ML-Backend werden in Azure als Container Apps betrieben.
+### MongoDB Atlas
+
+### Anwendungsfall
+![alt text](/images/ml_frontend.jpg)
+Der Anwendungsfall dieser Architektur sieht wie folgt aus:
+Der Priorizierungs service priotizert Daten wie wissenschaftliche Artikel und News, welche in der Mongodb abgelegt sind, anhand der Benutzereingaben (Keywords) im Frontend. Die Artikel welche die höchste Korrelation zu den Keywords besitzen werden dem Benutzer schlussendlich angezeigt. </br>
 
 ## Infrastructure as Code (IaC)
 Infrastructure as Code, kurz IaC, ist eine Methode um die Konfiguration von Infrastruktur als Ccode zu verwaltet wird. 
