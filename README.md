@@ -10,11 +10,18 @@ Die zu provisionierende Architektur besteht aus einem Angular Frontend und einem
 
 ### MongoDB Atlas
 ![alt text](/images/mongodb.jpg)
-Die MongoDb wir als Cluster mit drei Shareds auf AWS betrieben. Dieses Cluster wird Shared betrieben, also RAM und CPU wird sich mit anderen Benutzer geteilt. Da wir auch unter 512MB Speicher benutzen sind wir hier noch im free Tier, es gibt jedoch folgenden kostenpflichtige Optionen:
+Die MongoDb wir als Cluster mit drei Shareds auf AWS betrieben. Dieses Cluster wird Shared betrieben, also RAM und CPU wird sich mit anderen Benutzer geteilt. Da wir auch unter 512MB Speicher und keine Backups benutzen sind wir hier noch im free Tier, es gibt jedoch folgenden kostenpflichtige Optionen:
 
 <ul>
-  <li>Dedicated</li>
-  <li>Serverless</li>
+  <li>Dedicated: Eigener Server für Produktionsanwendungen mit anspruchsvollen Workload-Anforderungen</li>
+	<ul>
+	  <li>Multi-Cloud, Multi-Region und erweiterte Datenverteilung</li>
+	</ul>  
+  <li>Serverless: Für serverlose Anwendungen mit geringem oder variablem Datenverkehr</li>
+	<ul>
+	  <li>RAM und CPU lässt sich nahtlos an Ihre Arbeitslast anpassen</li>
+	  <li>Noch in Entwicklung: Multi-Cloud, Multi-Region und erweiterte Datenverteilung</li>
+	</ul>  
 </ul>  
 
 Weitere Informationen: https://www.mongodb.com/pricing
