@@ -16,10 +16,11 @@ Die MongoDb wir als Cluster mit drei Shards auf AWS betrieben. Dieses Cluster wi
   <li>Dedicated: Eigener Server für Produktionsanwendungen mit anspruchsvollen Workload-Anforderungen</li>
 	<ul>
 	  <li>Multi-Cloud, Multi-Region und erweiterte Datenverteilung</li>
+	  <li>Uptime SLA: 99.995%</li>
 	</ul>  
   <li>Serverless: Für serverlose Anwendungen mit geringem oder variablem Datenverkehr</li>
 	<ul>
-	  <li>RAM und CPU lässt sich nahtlos an Ihre Arbeitslast anpassen</li>
+	  <li>RAM und CPU lässt sich nahtlos an die Arbeitslast anpassen</li>
 	  <li>Noch in Entwicklung: Multi-Cloud, Multi-Region und erweiterte Datenverteilung</li>
 	</ul>  
 </ul>  
