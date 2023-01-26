@@ -350,3 +350,4 @@ Replikation. Wo nutzen Sie im gegenständlichen Projekt Daten-Replikation?</br>
 
 
 Kosten. Welche Kosten verursacht Ihre Lösung? Welchen monetären Vorteil hat diese Lösung gegenüber einer Nicht-Cloud-Lösung?</br>
+Die Azure Container Apps sind bis zu einer Anzahl von 2 Mio Request im Monat kostenlos. Diese Anzahl überschreiten wir in diesem Projekt nicht, daher gibt es auch keine Kosten zu verbuchen. Das MongoDB Cluster fällt bei der derzeitigen Verwendung ebenfalls noch in den free Tier.
