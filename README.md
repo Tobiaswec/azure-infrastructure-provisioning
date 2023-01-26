@@ -330,6 +330,10 @@ Ansible verfolgt im Vergleich zu Terraform einen prozedualen Ansatz und keinen d
 Bekannte Softwares dich sich ebenfalls in der selben Kategorie wie Ansible wieder finden sind Puppet und Chef. Diese sind jedoch bei weitem nicht so weit verbreitet wie Ansible. Der Grund dafür ist, dass Ansible im Vergleich zu der Konkurrenz „agentless“ funktioniert. Das bedeutet, dass auf den Rechnern, auf welche man zugreift, keinerlei Software für den Zugriff mit Ansible installiert werden muss. Die erlechtert, das initiale Setup und eventuelle Updates des Konfigurations-Management-Tools.
 
 
+
+## Fazit
+Wir haben sowohl mit Bicep als auch mit Terraform unser Provisonierungsziel ohne größere Probleme erreicht. Zu den Azure Container Apps sind die Quellen die man Online  bezüglich der Provisionierung findet noch sehr dürftig, weil diese erst vor kurzem released wurden, was die Aufgabenstellung etwas erschwert hat.Terraform hat aber die größere Community. Die Berechnung des Deltas von Terraform kann einen großen Vorteil bieten, wenn man häufige Änderungen an der Infrastruktur geplant hat. Bicep speichert zwar ebenfalls den State direkt in Azure ab, unsere Erfahrung zeigt aber, dass hier häufig nur ein komplett neues Deployment zum erwünschten Ergebnis führt, wenn man Änderungen an der Infrastruktur vornimmt. Die Multi-Plattform-Fähigkeit von Terraform sehen wir nur bedingt als Vorteil, da jeder Cloud-Anbieter verschiedene Services/Resourcen anbietet und man sich ohnehin mit diesen jeweils im Detail für die Provisionierung beschäftigen muss. Höchstens beim Einsatz von Multi-Cloud könnte dies ein Vorteil sein, da man einheitlich mit einer Sprache alles beschreibt.
+
 ## Fragestellungen der Abgabe:
 #### Automated Infrastructue Provisioning/(Infrastructure-as-Code). Wie wurde im vorliegenden Projekt Automated Infrastructure Provisioning berücksichtigt? </br>
 Es wurde ein Vergleich von Provisionierungsmöglichkeiten in Azure ausgearbeitet.</br>
