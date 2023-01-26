@@ -347,7 +347,7 @@ Weitere Informationen: https://azure.microsoft.com/en-us/support/legal/sla/conta
 In diesem Projekt wurde die NoSql Datenbank MongoDB verwendet, da unstrukturierte Daten gespeichert werden und die meisten Abfragen Bulk Request von 10000+ Einträgen sind. Zuvor wurde eine MySQL Datenbank verwendet, bei dieser führten diese Bulk Request zu Ladezeiten von mehreren Minuten.
 
 #### Replikation. Wo nutzen Sie im gegenständlichen Projekt Daten-Replikation?</br>
-
+Im MongoDB Cluster werden Daten zwischen den einzelnen Replicas repliziert. Die Azure Container Apps werden über den Autoscale sowie das setzen der max und min Replica anzahl repliziert. Es wird jedoch keine Georeplikation benutzt.
 
 #### Kosten. Welche Kosten verursacht Ihre Lösung? Welchen monetären Vorteil hat diese Lösung gegenüber einer Nicht-Cloud-Lösung?</br>
 Die Azure Container Apps sind bis zu einer Anzahl von 2 Mio. Request im Monat kostenlos. Diese Anzahl überschreiten wir in diesem Projekt nicht, daher gibt es auch keine Kosten zu verbuchen. </br>
