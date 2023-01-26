@@ -26,7 +26,7 @@ Die MongoDb wir als Cluster mit drei Shareds auf AWS betrieben. Dieses Cluster w
 
 Weitere Informationen: https://www.mongodb.com/pricing
 
-Unter Verwendung von MongoDB Atlas muss keine Infrastruktur provisioniert oder Clustter konfiguriert werden. Der Anbieter übernimmt das in diesem Fall, vorallem da wir den Shared Ansatz verwenden.
+Unter Verwendung von MongoDB Atlas muss keine Infrastruktur provisioniert oder Cluster konfiguriert werden. Der Anbieter übernimmt das in diesem Fall, vorallem da wir den Shared Ansatz verwenden.
 
 ### Anwendungsfall
 ![alt text](/images/ml_frontend.jpg)
