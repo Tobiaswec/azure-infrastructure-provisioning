@@ -332,8 +332,21 @@ Bekannte Softwares dich sich ebenfalls in der selben Kategorie wie Ansible wiede
 
 ## Fragestellungen der Abgabe:
 Automated Infrastructue Provisioning/(Infrastructure-as-Code). Wie wurde im vorliegenden Projekt Automated Infrastructure Provisioning berücksichtigt? </br>
+Es wurde ein Vergleich von Provisionierungsmöglichkeiten in Azure ausgearbeitet.</br>
+
 Skalierbarkeit. Wie wurde im vorliegenden Projekt Skalierbarkeit berücksichtigt?</br>
+Azure Container Apps sind hoch skalierbar. In diesem Projekt wurder der Autoscale von Azure verwendet, man kann die Anzahl der Instanzen dabei in den jeweiligen Templates mit "minReplicas" und "maxReplicas" definieren. Die Mindestanzahl sollte dabei auf 0 gesetzt werden damit die Container auf 0 herunterskalieren wenn diese nicht verwendet werden, dies spart Kosten. Die Maximale Anzahl kann nach belieben adaptiert werden.</br
+
 Ausfallssicherheit.  Wie wurde im vorliegenden Projekt Ausfallssicherheit berücksichtigt?</br>
+Die verwendete MongoDB wird als Cluster mit 3 Replicas betrieben, dies sollte eine gute Basis für die Ausfallsicherheit eine Datenbank bilden. In einem reelen Betrieb müssten natürliche Backups gemacht werden um diese im Worst Case wiederherrstellen zu können, jedoch wurde in diesem Studienprojekt auf Grund der Kosten darauf verzichtet.</br>
+
+Für die Azure Container Apps ist in den SLAs eine Ausfallsicherheit von 99.95% definiert. Für Projekte wie dieses, dass keine kritischen Daten verarbeitet und bei dem eine kurze Downtime keine tragischen Verluste zu verbuchen hätte ist es vollkommen ausreichend.</br>
+Weitere Informationen: https://azure.microsoft.com/en-us/support/legal/sla/container-apps/v1_0/ </br>
+
 NoSql. Welchen Beitrag leistet NoSql in der vorliegenden Problemstellung?</br>
+In diesem Projekt wurde die NoSql Datenbank MongoDB verwendet, da unstrukturierte Daten gespeichert werden und die meisten Abfragen Bulk Request von 10000+ Einträgen sind. Zuvor wurde eine MySQL Datenbank verwendet, bei dieser führten diese Bulk Request zu Ladezeiten von mehreren Minuten.
+
 Replikation. Wo nutzen Sie im gegenständlichen Projekt Daten-Replikation?</br>
+
+
 Kosten. Welche Kosten verursacht Ihre Lösung? Welchen monetären Vorteil hat diese Lösung gegenüber einer Nicht-Cloud-Lösung?</br>
