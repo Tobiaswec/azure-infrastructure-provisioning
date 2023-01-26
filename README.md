@@ -353,5 +353,5 @@ In diesem Projekt wurde die NoSql Datenbank MongoDB verwendet, da unstrukturiert
 Die Azure Container Apps sind bis zu einer Anzahl von 2 Mio. Request im Monat kostenlos. Diese Anzahl überschreiten wir in diesem Projekt nicht, daher gibt es auch keine Kosten zu verbuchen. </br>
 https://azure.microsoft.com/en-us/pricing/details/container-apps/ </br>
 
- </br>
+Das MongoDB Cluster fällt bei der derzeitigen Verwendung ebenfalls noch in den free Tier. </br>
 https://www.mongodb.com/pricing
