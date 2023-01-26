@@ -39,7 +39,7 @@ Infrastructure as Code, kurz IaC, ist eine Methode um die Konfiguration von Infr
 Sie ermöglicht es die Infrastruktur automatisiert bereitzustellen und diese schnell zu reproduzieren sowie Skalieren.
 Der Code kann, wie ein Programmcode, mittels Versionsverwaltungstools wie GIT verwaltet werden. Dies erlaubt es Änderungen an der Infrastruktur nachzuvollziehen. </br>
 
-In den meisten Provisionierungstools ist es möglich die Konfiguration deklarativ zu Beschreiben. Was bedeutet, dass nur der gewünschte Endzustand beschrieben werden muss und die notwendigen Änderungsschritte zum Erreichen dieser das Tool übernimmt. Zusätzlich lässt die deklarative Schreibweise den code lesbar und weniger fehleranfällig werden.
+In den meisten Provisionierungstools ist es möglich die Konfiguration deklarativ zu Beschreiben. Das bedeutet, dass nur der gewünschte Endzustand beschrieben werden muss und die notwendigen Änderungsschritte zum Erreichen dieser das Tool übernimmt. Zusätzlich lässt die deklarative Schreibweise den code lesbar und weniger fehleranfällig werden.
 
 ## Container Apps
 Azure Container Apps ist ein Dienst, der von Microsoft Azure angeboten wird und es ermöglicht, Microservices und containerisierte Anwendungen auf einer serverlosen Plattform zu betreiben. Serverless bedeutet, dass Services und Funktionen ausgeführt werden können ohne sich um die Infrastruktur kümmern zu müssen. In den dem fall kümmert sich der Cloud Anbieter um das Bereitstellen der Infrastruktur und das Konfigurieren der Umgebung. Diese Infrastruktur teilt man mit anderen Benutzern.
