@@ -305,7 +305,7 @@ terraform plan
 ```
 Der Befehl ```terraform apply``` führt den zuvor erstellten Terraform-Plan aus und erstellt oder ändert die Ressourcen, die in der Konfigurationsdatei definiert sind. Es werden die von ```terraform plan``` berechneten Schritte ausgeführt, um die gewünschten Ressourcen zu erstellen oder zu ändern.
 
-Der Befehl fordert eine Bestätigung des Benutzers an, bevor er fortfährt, und gibt eine Zusammenfassung der durchgeführten Änderungen aus.
+Der Befehl fordert eine Bestätigung des Benutzers an, bevor er fortfährt, und gibt eine Zusammenfassung der durchgeführten Änderungen aus. Abschließend wird der lokal gespeicherte Status der Cloud Infrastruktur aktualisiert.
 
 ```shell
 terraform apply
