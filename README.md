@@ -67,105 +67,11 @@ Das Erstellen einer Azure Container App sieht im Azure Portal wie folgt aus:
 Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Sub Pages wühlen um die Resourcegroup sowie die zwei Container Apps zu konfigurieren, vorausgesetzt man hat dies zuvor schon einmal gemacht und die UI hat sich nicht verändert.
 
 ### Bicep
-Bicep bietet als Domänenspezifische Sprache von Azure alle Möglichkeiten die auch ARM-Templates bieten, da es sich dabei nur um eine Abstrahierung mit leichter zu lesender Syntax handelt. Durch die Modularisierbarkeit bleibt Code auch für viele Container sehr übersichtlich.
-
-Zuerst muss eine Managed Environment erstellt werden :
-```bicep
-resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
-  name: name
-  location: location
-  properties: {
-    appLogsConfiguration: {
-      destination: 'log-analytics'
-      logAnalyticsConfiguration: {
-        customerId: lawClientId
-        sharedKey: lawClientSecret
-      }
-    }
-  }
-}
-
-```
-
-
-Anschließend ein Operational Insights Service an den die Container Apps die Logs schicken:
-
-
-```Bicep
-resource law 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
-  name: name
-  location: location
-  properties: any({
-    retentionInDays: 30
-    features: {
-      searchVersion: 1
-    }
-    sku: {
-      name: 'PerGB2018'
-    }
-  })
-}
-```
-
-
-
-
-
-Nun können die Azure Container Apps erzeugt werden:
-
-```Bicep
-resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
-  name: name
-  location: location
-  properties: {
-    managedEnvironmentId: containerAppEnvironmentId
-    .
-    .
-    .  //configuration cutted out
-    .
-    
-    template: {
-      containers: [
-        {
-          image: containerImage
-          name: name
-          env: envVars
-        }
-      ]
-      scale: {
-        minReplicas: 0
-        maxReplicas: 1
-      }
-    }
-  }
-}
-
-```
-
-Die seperaten Bicep-Files können nun in einer ```main.bicep``` zu Modulen gemacht und parametriert werden. Hier am Beispiel des Frontend Containers:
-```bicep
-
-module containerApp_Ml_Frontend 'containerapp.bicep' = {
-  name: 'container-app-ml-frontend'
-  params: {
-    name: 'container-app-ml-frontend'
-    location: location
-    containerAppEnvironmentId: containerAppEnvironment.outputs.id
-    containerImage: 'anyidea/ml-frontend:master-thesis'
-    containerPort: 80 
-    registry: 'index.docker.io'
-    registryUsername: registryUsername
-    registryPassword: registryPassword 
-    envVars: [{name:'PROFILE',value: 'stage'},{name:'ML_PRIORITIZER_URL',value: containerApp_Ml_Prioritizer.outputs.fqdn}]
-  }
-}
-
-```
 ### Terraform
 Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschiedenen Cloud Plattformen/Anbieter wie AWS, Microsoft Azure oder Google Cloud zu provisionieren. Sie verwendet dabei eine eigene Sprache die HashiCorp Configuration Language(HCL). Dies ist von der Syntax sehr ähnlich wie JSON.
 
 <img src="/images/terraform.jpg" alt="drawing" width="500"/>
-Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur berechnet sich das Delta zum gewünschtem, im Terraformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API, um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnung benötigt wird, ist auf dem lokalen System gespeichert und muss ebenfalls in die Versionsverwaltung integriert werden.
+Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur berechnet sich das Delta zum gewünschtem, im Terraformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API, um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnung benötigt wird, ist auf dem lokalen System gespeichert und muss ebenfalls in die Versionsverwaltung integriert werden. Dieser Iststand der provisionierten Infrastruktur könnte auch über das ```terraform_remote_state``` feature auf Amazon S3, Azure Blob Storage, Google Cloud Storage, Alibaba Cloud OSS gespeichert werden.
 
 #### Terraform Provider
 Terraform Provider sind Erweiterungen für Terraform, die es ermöglichen, Ressourcen in verschiedenen Technologie-Stack zu verwalten. Jeder Provider ist für eine bestimmte Technologie oder einen Dienst verantwortlich und stellt die entsprechenden Ressourcen und Aktionen bereit, die von Terraform verwendet werden können. In diesem Fall wurde der Azure Ressource Manager zum provisionieren der Ressourcegroup sowie der Log Analytics verwendet. Zusätzlich musste die Azure API eingebunden werden da Terraform die Container Apps noch nicht native unterstützt.
@@ -424,7 +330,7 @@ Ansible verfolgt im Vergleich zu Terraform einen prozedualen Ansatz und keinen d
 
 Bekannte Softwares dich sich ebenfalls in der selben Kategorie wie Ansible wieder finden sind Puppet und Chef. Diese sind jedoch bei weitem nicht so weit verbreitet wie Ansible. Der Grund dafür ist, dass Ansible im Vergleich zu der Konkurrenz „agentless“ funktioniert. Das bedeutet, dass auf den Rechnern, auf welche man zugreift, keinerlei Software für den Zugriff mit Ansible installiert werden muss. Die erlechtert, das initiale Setup und eventuelle Updates des Konfigurations-Management-Tools.
 
-![alt text](/images/ansible.jpg)
+
 
 ## Fazit
 Wir haben sowohl mit Bicep als auch mit Terraform unser Provisonierungsziel ohne größere Probleme erreicht. Zu den Azure Container Apps sind die Quellen die man Online  bezüglich der Provisionierung findet noch sehr dürftig, weil diese erst vor kurzem released wurden, was die Aufgabenstellung etwas erschwert hat.Terraform hat aber die größere Community. Die Berechnung des Deltas von Terraform kann einen großen Vorteil bieten, wenn man häufige Änderungen an der Infrastruktur geplant hat. Bicep speichert zwar ebenfalls den State direkt in Azure ab, unsere Erfahrung zeigt aber, dass hier häufig nur ein komplett neues Deployment zum erwünschten Ergebnis führt, wenn man Änderungen an der Infrastruktur vornimmt. Die Multi-Plattform-Fähigkeit von Terraform sehen wir nur bedingt als Vorteil, da jeder Cloud-Anbieter verschiedene Services/Resourcen anbietet und man sich ohnehin mit diesen jeweils im Detail für die Provisionierung beschäftigen muss. Höchstens beim Einsatz von Multi-Cloud könnte dies ein Vorteil sein, da man einheitlich mit einer Sprache alles beschreibt.
