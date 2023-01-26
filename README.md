@@ -335,7 +335,7 @@ Bekannte Softwares dich sich ebenfalls in der selben Kategorie wie Ansible wiede
 Es wurde ein Vergleich von Provisionierungsmöglichkeiten in Azure ausgearbeitet.</br>
 
 #### Skalierbarkeit. Wie wurde im vorliegenden Projekt Skalierbarkeit berücksichtigt?</br>
-Azure Container Apps sind hoch skalierbar. In diesem Projekt wurden der Autoscale von Azure verwendet, man kann die Anzahl der Instanzen dabei in den jeweiligen Templates mit "minReplicas" und "maxReplicas" definieren. Die Mindestanzahl sollte dabei auf 0 gesetzt werden damit die Container auf 0 herunterskalieren, wenn diese nicht verwendet werden, dies spart Kosten. Die Maximale Anzahl kann nach Belieben adaptiert werden.</br
+Azure Container Apps sind hoch skalierbar. In diesem Projekt wurden der Autoscale von Azure verwendet, man kann die Anzahl der Instanzen dabei in den jeweiligen Templates mit "minReplicas" und "maxReplicas" definieren. Die Mindestanzahl sollte dabei auf 0 gesetzt werden damit die Container auf 0 herunterskalieren, wenn diese nicht verwendet werden, dies spart Kosten. Die Maximale Anzahl kann nach Belieben adaptiert werden.</br>
 
 #### Ausfallssicherheit.  Wie wurde im vorliegenden Projekt Ausfallssicherheit berücksichtigt?</br>
 Die verwendete MongoDB wird als Cluster mit 3 Replicas betrieben, dies sollte eine gute Basis für die Ausfallsicherheit eine Datenbank bilden. In einem reellen Betrieb müssten natürliche Backups gemacht werden um diese im Worst Case wiederherstellen zu können, jedoch wurde in diesem Studienprojekt auf Grund der Kosten darauf verzichtet.</br>
