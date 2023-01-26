@@ -6,11 +6,11 @@ Wir versuchen mit der für uns neue Technologie Terraform, Infrastruktur auf Mic
 ## Architektur
 ![alt text](/images/architecture.jpg)
 
-Die zu provisionierende Architektur besteht aus einem Angular Frontend und einem Python/Flask Backend-Service. Als Datenbank wir ein MongoDB Cluster verwendet die über MongoDB Atlas auf AWS betrieben wird. Die Service ML-Frontend und ML-Backend werden in Azure als Container Apps betrieben.
+Die zu provisionierende Architektur besteht aus einem Angular Frontend und einem Python/Flask Backend-Service. Als Datenbank wir ein MongoDB Cluster verwenden, die über MongoDB Atlas auf AWS betrieben wird. Die Service ML-Frontend und ML-Backend werden in Azure als Container Apps betrieben.
 
 ### MongoDB Atlas
 ![alt text](/images/mongodb.jpg)
-Die MongoDb wir als Cluster mit drei Shareds auf AWS betrieben. Dieses Cluster wird Shared betrieben, also RAM und CPU wird sich mit anderen Benutzer geteilt. Da wir auch unter 512MB Speicher und keine Backups benutzen sind wir hier noch im free Tier, es gibt jedoch folgenden kostenpflichtige Optionen:
+Die MongoDb wir als Cluster mit drei Shards auf AWS betrieben. Dieses Cluster wird Shared betrieben, also RAM und CPU wird sich mit anderen Benutzern geteilt. Da wir auch unter 512MB Speicher und keine Backups benutzen sind wir hier noch im free Tier, es gibt jedoch folgenden kostenpflichtige Optionen:
 
 <ul>
   <li>Dedicated: Eigener Server für Produktionsanwendungen mit anspruchsvollen Workload-Anforderungen</li>
@@ -26,50 +26,50 @@ Die MongoDb wir als Cluster mit drei Shareds auf AWS betrieben. Dieses Cluster w
 
 Weitere Informationen: https://www.mongodb.com/pricing
 
-Unter Verwendung von MongoDB Atlas muss keine Infrastruktur provisioniert oder Cluster konfiguriert werden. Der Anbieter übernimmt das in diesem Fall, vorallem da wir den Shared Ansatz verwenden.
+Unter Verwendung von MongoDB Atlas muss keine Infrastruktur provisioniert oder Cluster konfiguriert werden. Der Anbieter übernimmt das in diesem Fall, vor allem da wir den Shared Ansatz verwenden.
 
 ### Anwendungsfall
 ![alt text](/images/ml_frontend.jpg)
 Der Anwendungsfall dieser Architektur sieht wie folgt aus:
-Der Priorizierungs service priotizert Daten wie wissenschaftliche Artikel und News, welche in der Mongodb abgelegt sind, anhand der Benutzereingaben (Keywords) im Frontend. Die Artikel welche die höchste Korrelation zu den Keywords besitzen werden dem Benutzer schlussendlich angezeigt. </br>
+Der Priorisierung Service priorisiert Daten wie wissenschaftliche Artikel und News, welche in der MongoDB abgelegt sind, anhand der Benutzereingaben (Keywords) im Frontend. Die Artikel welche die höchste Korrelation zu den Keywords besitzen werden dem Benutzer schlussendlich angezeigt. </br>
 
 ## Infrastructure as Code (IaC)
-Infrastructure as Code, kurz IaC, ist eine Methode um die Konfiguration von Infrastruktur als Ccode zu verwaltet wird. 
-Sie ermöglicht es die Infrastruktur automatisiert bereitzustellen und diese schnell zu Reproduzieren sowie Skalieren.
-Der Code kann, wie ein Programmcode, mittes Versionsverwaltungstools wie Git verwaltet werden. Dies erlaubt es Anderungen an der infrastruktur nachzuvollziehen. </br>
+Infrastructure as Code, kurz IaC, ist eine Methode um die Konfiguration von Infrastruktur als Code zu verwaltet wird. 
+Sie ermöglicht es die Infrastruktur automatisiert bereitzustellen und diese schnell zu reproduzieren sowie Skalieren.
+Der Code kann, wie ein Programmcode, mittels Versionsverwaltungstools wie GIT verwaltet werden. Dies erlaubt es Änderungen an der Infrastruktur nachzuvollziehen. </br>
 
-In den meisten Provisionierungs Tools is es möglich die Konfigruation deklarativ zu Beschreiben. Was bedeutet, dass nur der gewünschten Endzustand beschrieben werdne muss und die notwendigen Änderungsschritte zum Erreichen dieser das Tool übernimmt. Zusätzlich lässt die deklarative Schreibweise den code lesbar und weniger fehleranfällig werden.
+In den meisten Provisionierungstools ist es möglich die Konfiguration deklarativ zu Beschreiben. Was bedeutet, dass nur der gewünschte Endzustand beschrieben werden muss und die notwendigen Änderungsschritte zum Erreichen dieser das Tool übernimmt. Zusätzlich lässt die deklarative Schreibweise den code lesbar und weniger fehleranfällig werden.
 
 ## Container Apps
-Azure Container Apps ist ein Dienst der von Microsoft Azure angeboten wird und esermöglicht, Microservices und containerisierte Anwendungen auf einer serverlosen Plattform zu betreiben. Serverless bedeutet dass Services und Funktionen ausgeführt werden können ohne sich um die Infrastruktur kümmern zu müssen. In den dem fall kümmert sich der Cloud Anbieter um das bereitstellen der Infrasturktur und das Konfigurieren der Umgebung. Diese Infrasturktur teilt man mit anderen Benutzern.
+Azure Container Apps ist ein Dienst, der von Microsoft Azure angeboten wird und es ermöglicht, Microservices und containerisierte Anwendungen auf einer serverlosen Plattform zu betreiben. Serverless bedeutet, dass Services und Funktionen ausgeführt werden können ohne sich um die Infrastruktur kümmern zu müssen. In den dem fall kümmert sich der Cloud Anbieter um das Bereitstellen der Infrastruktur und das Konfigurieren der Umgebung. Diese Infrastruktur teilt man mit anderen Benutzern.
 
-Die Container Apps können auch eventgesteuert verwendet und skaliert werden. Azure bietet eine Autoskalierung, welche das Service dynamisch nach Last skaliert und wenn kein Datenverkehr herrscht wird das Service auf O Instanzen herunterskaliert.
-Man kann mehrere Versionen des selben Services gleichzeitg betreiben und den Traffic zwischen den Versionen aufteilen, dies ermöglicht ebenfalls green/blue deployments.
+Die Container Apps können auch eventgesteuert verwendet und skaliert werden. Azure bietet eine Autoskalierung, welche das Service dynamisch nach Last skaliert und wenn kein Datenverkehr herrscht, wird das Service auf O Instanzen herunterskaliert.
+Man kann mehrere Versionen des selben Services gleichzeitig betreiben und den Traffic zwischen den Versionen aufteilen, dies ermöglicht ebenfalls green/blue deployments.
 
-Auch wenn die Azure Container Apps grundsätzlich Serverless sind, muss man dennoch Ressourcen wie eine Enviroment und die Log Analytics konfiguriert werden. In dem Enviroment werden die Container betrieben und in den Log Analytics werden die Service Logs der einzelnen Container gesammelt.
+Auch wenn die Azure Container Apps grundsätzlich Serverless sind, muss man dennoch Ressourcen wie eine Environment und die Log Analytics konfiguriert werden. In dem Environment werden die Container betrieben und in den Log Analytics werden die Service Logs der einzelnen Container gesammelt.
 
 Dadurch das die Container Apps serverless sind und auf 0 skalieren können sind sie sehr kostengünstig. Unter zwei Millionen Requests sind die Container Apps grundsätzlich gratis, jedoch überschreitet man diese Anzahl oder benötigt sehr lange execution time per request können diese auch sehr teuer werden. Es gilt die Services sehr effizient zu implementieren und diese nur dann aktive zu Betreiben wenn notwendig.
 
 ## Provisionierung in Azure
 
 ### Azure Portal
-Das erstmalige Provisionieren von Infrasturktur für kleine Architekturn ist unter Verwendung des Azure Portal relative einfach und schnell. Die interaktive Web-UI ermöglicht es auch Personen die nicht Entwickler sind oder Code schreiben können, Infrastruktur zu provisionieren.
+Das erstmalige Provisionieren von Infrastruktur für kleine Architekturen ist unter Verwendung des Azure Portal relative einfach und schnell. Die interaktive Web-UI ermöglicht es auch Personen die nicht Entwickler sind oder Code schreiben können, Infrastruktur zu provisionieren.
 
-Jedoch hat die Verwendung des Azure Portals einige Nachteile im Vergleich zu den Infrastructure as Code ansätzen.
-Die Infrastruktur kann nicht versioniert werden und bei Änderungen muss wieder durch etliche Subpages des Protals durchgeklickt werden. Es können zwar ARM-Templates aus der erstellten Infrastruktur generiert werden, jedoch hatten wir beim importieren dieser einige Probleme.
+Jedoch hat die Verwendung des Azure Portals einige Nachteile im Vergleich zu den Infrastructure as Code Ansatz.
+Die Infrastruktur kann nicht versioniert werden und bei Änderungen muss wieder durch etliche Sub Pages des Portals durchgeklickt werden. Es können zwar ARM-Templates aus der erstellten Infrastruktur generiert werden, jedoch hatten wir beim Importieren dieser einige Probleme.
 Das manuelle Konfigurieren ist natürlich auch wesentlich fehleranfälliger als durch die Beschreibung durch Code.
 
 Das Erstellen einer Azure Container App sieht im Azure Portal wie folgt aus:
 
 ![alt text](/images/az_portal.JPG)
 ![alt text](/images/az_portal_2.JPG) </br>
-Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Subpages wühlen um die Resourcegroup sowie die zwei Container Apps zu konfigurieren, vorrausgesetzt man hat dies zuvor schon einmal gemacht und die UI hat sich nicht verändert.
+Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Sub Pages wühlen um die Resourcegroup sowie die zwei Container Apps zu konfigurieren, vorausgesetzt man hat dies zuvor schon einmal gemacht und die UI hat sich nicht verändert.
 
 ### Bicep
 ### Terraform
-Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschiedenen Cloud Platformen/Anbieter wie AWS, Microsoft Azure oder Google cloud zu provisionieren. Sie verwendet dabei eine eigene Sprache die HashiCorp Configuration Language(HCL). Dies ist von der Syntac sher ähnlich wie Json.
+Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschiedenen Cloud Plattformen/Anbieter wie AWS, Microsoft Azure oder Google Cloud zu provisionieren. Sie verwendet dabei eine eigene Sprache die HashiCorp Configuration Language(HCL). Dies ist von der Syntax sehr ähnlich wie JSON.
 
-Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur brechnet sich das Delta zum gewünschtem, im Terrformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnnung benötigt wird, muss auf dem lokalen System gespeichert sein und ebenfalls in die Versionsverwaltung integriert werden.
+Terraform erlaubt es den Infrastrukturcode deklarativ zu beschreiben. Der Code anschließend mit dem Befehl ```terraform apply``` ausgeführt werden. Dieser Kommand prüft zuerst den aktuellen Zustand der vorhanden Cloud Infrastruktur berechnet sich das Delta zum gewünschtem, im Terraformcode beschrieben Zustand und kommuniziert anschließend mit der Azure API, um die notwendigen Änderungen durchzuführen. Der Iststand der aktuellen Infrastruktur, welcher für die Delta-Berechnung benötigt wird, muss auf dem lokalen System gespeichert sein und ebenfalls in die Versionsverwaltung integriert werden.
 
 #### Terraform Provider
 Terraform Provider sind Erweiterungen für Terraform, die es ermöglichen, Ressourcen in verschiedenen Technologie-Stack zu verwalten. Jeder Provider ist für eine bestimmte Technologie oder einen Dienst verantwortlich und stellt die entsprechenden Ressourcen und Aktionen bereit, die von Terraform verwendet werden können. In diesem Fall wurde der Azure Ressource Manager zum provisionieren der Ressourcegroup sowie der Log Analytics verwendet. Zusätzlich musste die Azure API eingebunden werden da Terraform die Container Apps noch nicht native unterstützt.
@@ -96,7 +96,7 @@ provider "azurerm" {
 provider "azapi" { }
 ```
 #### Erstellen einer Resource Group
-Eine Resource Group in Azure ist eine logische Gruppe von Azure-Ressourcen, die gemeinsam verwaltet werden. In diesem Beispiel werden die Container Enviroment, die Log Analytics sowie die Container Apps in der "clcProjectTerraform" verwaltet.
+Eine Ressource Group in Azure ist eine logische Gruppe von Azure-Ressourcen, die gemeinsam verwaltet werden. In diesem Beispiel werden die Container Environment, die Log Analytics sowie die Container Apps in der "clcProjectTerraform" verwaltet.
 ```terraform
 resource "azurerm_resource_group" "rg" {
   name      = "clcProjectTerraform"
@@ -105,7 +105,7 @@ resource "azurerm_resource_group" "rg" {
 }
 ```
 #### Erstellen von Log Analytics
-Azure Log Analytics ist ein Dienst in Azure, mit dem Sie system- und anwendungsbezogene Logs und Metriken sammeln, analysieren und visualisieren können. Es bietet eine einheitliche Plattform für die Überwachung von Azure-Ressourcen, wie beispielsweise die Contaienr Apps.
+Azure Log Analytics ist ein Dienst in Azure, mit dem Sie system- und anwendungsbezogene Logs und Metriken sammeln, analysieren und visualisieren können. Es bietet eine einheitliche Plattform für die Überwachung von Azure-Ressourcen, wie beispielsweise die Container Apps.
 ```terraform
 resource "azurerm_log_analytics_workspace" "log" {
   name                = "log-aca-terraform"
@@ -188,7 +188,7 @@ variable "container_apps" {
   }] 
 ```
 
-Um die Container Apps zu provisionieren wurde über die Liste iteriert und so konnte ein generische Funktion zum erstellen dieser implementiert werden. Da Terraform die Container Apps nicht nativ unterstützt musste hier die ```azapi_resource``` verwendet werden, welche direkt mit der Azure API kommuniziert. Ebenfalls wurde hier eine private Docker Registry verwendet, nutzt man die Azure Container Registry muss man keine Registry definieren. 
+Um die Container Apps zu provisionieren wurde über die Liste iteriert und so konnte ein generische Funktion zum Erstellen dieser implementiert werden. Da Terraform die Container Apps nicht nativ unterstützt musste hier die ```azapi_resource``` verwendet werden, welche direkt mit der Azure API kommuniziert. Ebenfalls wurde hier eine private Docker Registry verwendet, nutzt man die Azure Container Registry muss man keine Registry definieren.
 ```terraform
 resource "azapi_resource" "aca" {
   for_each  = { for ca in var.container_apps: ca.name => ca}
@@ -250,7 +250,7 @@ resource "azapi_resource" "aca" {
 }
 ```
 
-Um einen Output, wie Beispielsweise der Fully Quallified Domain Name, nach der Erstellung eines Cotainer nutzen zu können muss dieser bereits im Template definiert werden definiert werden. 
+Um einen Output, wie Beispielsweise der Fully Quallified Domain Name, nach der Erstellung eines Container nutzen zu können muss dieser bereits im Template definiert werden definiert werden.
 ```terraform 
 response_export_values = ["properties.configuration.ingress.fqdn"]
 ```
@@ -279,7 +279,7 @@ resource "azapi_resource" "certificate" {
 }
 ```
 
-Bei Azure Container Apps kann man anschließend den Custom Domain wie folgt setzen.
+Bei Azure Container Apps kann man anschließend die Custom Domain wie folgt setzen.
 ```terraform
 customDomains = each.value.domain == "" ? null : [
             {
@@ -290,7 +290,7 @@ customDomains = each.value.domain == "" ? null : [
           ] 
 ```
 ### Befehle
-Normalerweise würde man ein Serivce Principle zu authentifizierung nutzen jedoch ist dies im Students account nicht möglich daher musste die Azure CLI verwendet werden.
+Normalerweise würde man ein Service Principle zu Authentifizierung nutzen jedoch ist dies im Student Account nicht möglich daher musste die Azure CLI verwendet werden.
 ```shell
 az login
 ```
