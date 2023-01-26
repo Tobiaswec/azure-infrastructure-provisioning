@@ -67,6 +67,100 @@ Das Erstellen einer Azure Container App sieht im Azure Portal wie folgt aus:
 Kleiner Fun Fact am Rande man benötigt 80 Klicks und muss sich durch 22 Sub Pages wühlen um die Resourcegroup sowie die zwei Container Apps zu konfigurieren, vorausgesetzt man hat dies zuvor schon einmal gemacht und die UI hat sich nicht verändert.
 
 ### Bicep
+Bicep bietet als Domänenspezifische Sprache von Azure alle Möglichkeiten die auch ARM-Templates bieten, da es sich dabei nur um eine Abstrahierung mit leichter zu lesender Syntax handelt. Durch die Modularisierbarkeit bleibt Code auch für viele Container sehr übersichtlich.
+
+Zuerst muss eine Managed Environment erstellt werden :
+```bicep
+resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
+  name: name
+  location: location
+  properties: {
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: lawClientId
+        sharedKey: lawClientSecret
+      }
+    }
+  }
+}
+
+```
+
+
+Anschließend ein Operational Insights Service an den die Container Apps die Logs schicken:
+
+
+```Bicep
+resource law 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: name
+  location: location
+  properties: any({
+    retentionInDays: 30
+    features: {
+      searchVersion: 1
+    }
+    sku: {
+      name: 'PerGB2018'
+    }
+  })
+}
+```
+
+
+
+
+
+Nun können die Azure Container Apps erzeugt werden:
+
+```Bicep
+resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
+  name: name
+  location: location
+  properties: {
+    managedEnvironmentId: containerAppEnvironmentId
+    .
+    .
+    .  //configuration cutted out
+    .
+    
+    template: {
+      containers: [
+        {
+          image: containerImage
+          name: name
+          env: envVars
+        }
+      ]
+      scale: {
+        minReplicas: 0
+        maxReplicas: 1
+      }
+    }
+  }
+}
+
+```
+
+Die seperaten Bicep-Files können nun in einer ```main.bicep``` zu Modulen gemacht und parametriert werden. Hier am Beispiel des Frontend Containers:
+```bicep
+
+module containerApp_Ml_Frontend 'containerapp.bicep' = {
+  name: 'container-app-ml-frontend'
+  params: {
+    name: 'container-app-ml-frontend'
+    location: location
+    containerAppEnvironmentId: containerAppEnvironment.outputs.id
+    containerImage: 'anyidea/ml-frontend:master-thesis'
+    containerPort: 80 
+    registry: 'index.docker.io'
+    registryUsername: registryUsername
+    registryPassword: registryPassword 
+    envVars: [{name:'PROFILE',value: 'stage'},{name:'ML_PRIORITIZER_URL',value: containerApp_Ml_Prioritizer.outputs.fqdn}]
+  }
+}
+
+```
 ### Terraform
 Terraform ist ein open-source Provisionierungstool um Infrastruktur auf verschiedenen Cloud Plattformen/Anbieter wie AWS, Microsoft Azure oder Google Cloud zu provisionieren. Sie verwendet dabei eine eigene Sprache die HashiCorp Configuration Language(HCL). Dies ist von der Syntax sehr ähnlich wie JSON.
 
