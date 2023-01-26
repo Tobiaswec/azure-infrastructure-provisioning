@@ -340,7 +340,7 @@ Azure Container Apps sind hoch skalierbar. In diesem Projekt wurden der Autoscal
 #### Ausfallssicherheit.  Wie wurde im vorliegenden Projekt Ausfallssicherheit berücksichtigt?</br>
 Die verwendete MongoDB wird als Cluster mit 3 Replicas betrieben, dies sollte eine gute Basis für die Ausfallsicherheit eine Datenbank bilden. In einem reellen Betrieb müssten natürliche Backups gemacht werden um diese im Worst Case wiederherstellen zu können, jedoch wurde in diesem Studienprojekt auf Grund der Kosten darauf verzichtet.</br>
 
-Für die Azure Container Apps ist in den SLAs eine Ausfallsicherheit von 99.95% definiert. Für Projekte wie dieses, dass keine kritischen Daten verarbeitet und bei dem eine kurze Downtime keine tragischen Verluste zu verbuchen hätte ist es vollkommen ausreichend.</br>
+Für die Azure Container Apps ist in den SLAs eine Ausfallsicherheit von 99.95% definiert. Für Projekte wie dieses, die keine kritischen Daten verarbeiten und bei dem eine kurze Downtime zu keinen tragischen Verlust führen würde, ist das vollkommen ausreichend.</br>
 Weitere Informationen: https://azure.microsoft.com/en-us/support/legal/sla/container-apps/v1_0/ </br>
 
 #### NoSql. Welchen Beitrag leistet NoSql in der vorliegenden Problemstellung?</br>
